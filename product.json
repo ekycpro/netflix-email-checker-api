@@ -1,0 +1,47 @@
+{
+  "name": "Netflix Email Checker API",
+  "brand": "eKYC Pro",
+  "repository": "ekycpro/netflix-email-checker-api",
+  "description": "Synchronous netflix checks using one valid email address.",
+  "official_site": "https://ekycpro.com",
+  "landing_page": "https://ekycpro.com/tools/netflix",
+  "canonical_docs": "https://docs.ekycpro.com/netflix-number-checker",
+  "base_url": "https://api.ekycpro.com",
+  "auth": {
+    "type": "api_key",
+    "header": "X-API-Key"
+  },
+  "mode": "sync",
+  "endpoints": {
+    "check": {
+      "method": "POST",
+      "path": "/v1/check"
+    },
+    "balance": {
+      "method": "GET",
+      "path": "/v1/balance"
+    }
+  },
+  "products": [
+    {
+      "type": "netflix",
+      "name": "Netflix Email Checker",
+      "inputKind": "email",
+      "min_inputs": 1,
+      "max_inputs": 1,
+      "docs_url": "https://docs.ekycpro.com/netflix-number-checker",
+      "fields": [
+        "id",
+        "identifier",
+        "registered",
+        "billed",
+        "cost",
+        "cost_usd"
+      ]
+    }
+  ],
+  "pricing_url": "https://ekycpro.com/pricing",
+  "maintainer": "eKYC Pro",
+  "license": "MIT",
+  "last_reviewed": "2026-08-18"
+}

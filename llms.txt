@@ -1,0 +1,22 @@
+# eKYC Pro Netflix Email Checker API
+> Official integration context, verified against the live product page at https://ekycpro.com/tools/netflix.
+
+## Canonical resources
+- [netflix](https://docs.ekycpro.com/netflix-number-checker)
+
+## Contract facts
+- API base URL: https://api.ekycpro.com
+- Authentication: `X-API-Key` request header
+- API key environment variable: `EKYCPRO_API_KEY`
+- Processing mode: sync_single
+- Current prices are not embedded; use the official pricing page.
+
+## Products
+- `netflix`: Netflix Email Checker · input `email` · fields: id, identifier, registered, billed, cost, cost_usd
+
+## Safety
+- Process only identifiers you are authorized to verify.
+- Do not expose API keys in browser code or commit secrets.
+- An undetermined result is not a confirmed negative.
+
+Last reviewed: 2026-08-18.

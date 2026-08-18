@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: Netflix Email Checker API
+  version: 1.0.0
+  description: Synchronous eKYC Pro single-identifier checks. Use the service_type listed in product.json.
+  contact:
+    name: eKYC Pro
+    url: https://ekycpro.com/tools/netflix
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit
+externalDocs:
+  description: eKYC Pro documentation
+  url: https://docs.ekycpro.com/netflix-number-checker
+servers:
+  - url: https://api.ekycpro.com
+security:
+  - ApiKeyAuth: []
+paths:
+  /v1/check:
+    post:
+      summary: Check one authorized identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_type, identifier]
+              properties:
+                service_type:
+                  type: string
+                  enum: [netflix]
+                identifier:
+                  type: string
+                  description: one valid email address, according to service_type.
+      responses:
+        '200':
+          description: Determined result, or an unbilled undetermined result with success=false
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CheckEnvelope' }
+        '400': { description: Invalid input }
+        '401': { description: Invalid API key }
+        '402': { description: Insufficient balance }
+        '500': { description: Server error }
+  /v1/balance:
+    get:
+      summary: Read account balance in USD
+      responses:
+        '200':
+          description: Current account balance
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Balance' }
+        '401': { description: Invalid API key }
+components:
+  securitySchemes:
+    ApiKeyAuth: { type: apiKey, in: header, name: X-API-Key }
+  schemas:
+    Balance:
+      type: object
+      required: [balance]
+      properties:
+        balance: { type: number, format: double }
+    CheckEnvelope:
+      type: object
+      required: [success, pricingStrategy, transactionId]
+      properties:
+        success: { type: boolean }
+        data: { $ref: '#/components/schemas/CheckResult' }
+        error: { type: string }
+        pricingStrategy: { type: string, enum: [PAY, FREE] }
+        transactionId: { type: string }
+    CheckResult:
+      type: object
+      required: [id, identifier, registered, billed, cost, cost_usd]
+      properties:
+        id: { type: string }
+        identifier: { type: string }
+        registered: { type: boolean }
+        billed: { type: boolean }
+        cost: { type: integer, format: int64 }
+        cost_usd: { type: number, format: double }
