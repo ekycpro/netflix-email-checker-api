@@ -31,7 +31,7 @@ curl -X POST "https://api.ekycpro.com/v1/check" -H "X-API-Key: ${EKYCPRO_API_KEY
 
 ## Runnable examples
 
-Eight self-contained examples are provided under `examples/`: Python, Node.js, Go, Java, C#, PHP, and Shell each call the synchronous `POST /v1/check` endpoint with HTTP error handling; browser JavaScript calls a same-origin proxy and never contains an API key. Set the server-side API-key environment variable before running them.
+Seven self-contained examples are provided under `examples/`: Python, Node.js, Go, Java, C#, PHP, and Shell each call the synchronous `POST /v1/check` endpoint with HTTP error handling. Set the server-side API-key environment variable before running them.
 
 ## Official resources
 
